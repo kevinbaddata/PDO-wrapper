@@ -31,7 +31,16 @@ class DB
 
     }
 
-    public static function Insert($table, $params = [])
+    public static function Select($param = '')
+    {
+        $sql = 'SELECT * FROM  ' . $param . '  ';
+
+        return self::$db->query($sql)->fetchAll();
+    }
+
+
+
+    public static function Insert($table = '', $params = [])
     {
         $keys = '';
         $values = [];

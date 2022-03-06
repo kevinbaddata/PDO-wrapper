@@ -31,7 +31,7 @@ class DB
 
     }
 
-    public static function Select($param = '')
+    public static function Select($param = "")
     {
         $sql = 'SELECT * FROM  ' . $param . '  ';
 
@@ -57,5 +57,15 @@ class DB
             ->execute(
                 $values
             );
+    }
+
+    public static function Delete($param = "")
+    {
+        // sql to delete a record
+        $sql = "DELETE FROM " . $param;
+
+        // use exec() because no results are returned
+        self::$db->exec($sql);
+        echo "Record deleted successfully";
     }
 }

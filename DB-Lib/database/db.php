@@ -5,12 +5,10 @@ class DB
 
     public static function Connect()
     {
-
         try {
-            self::$db = new PDO("mysql:host=localhost;dbname=oop", 'root', '');
+            self::$db = new PDO("mysql:host=localhost;dbname=chat", 'root', '');
             // set the PDO error mode to exception
             self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "DB Connection successfull!";
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
@@ -21,13 +19,12 @@ class DB
 
         try {
             self::$db->exec("CREATE DATABASE " . $param);
-            echo "Database created successfully <br>";
+         
         } catch (PDOException $e) {
 
-            //...
+            echo "Error creating database: " . $e->getMessage();
         }
-        //...
-
+        
 
     }
 
@@ -52,7 +49,7 @@ class DB
 
         $keys = trim($keys, ' , ');
 
-        echo 'Successfully added <br>';
+     
         return self::$db->prepare('INSERT INTO ' . $table . ' SET ' . $keys . ' ')
             ->execute(
                 $values
@@ -66,6 +63,19 @@ class DB
 
         // use exec() because no results are returned
         self::$db->exec($sql);
-        echo "Record deleted successfully";
+        
+    }
+
+
+    public static function Truncate($param = "")
+    {
+        // Truncate
+        self::$db->exec("TRUNCATE TABLE " . $param);
+      
+    }
+
+    public static function DropTable($param = '') {
+        self::$db->exec("DROP TABLE " . $param);
     }
 }
+

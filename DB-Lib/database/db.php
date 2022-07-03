@@ -30,11 +30,10 @@ class DB
 
     public static function Select($param = "")
     {
-        $sql = 'SELECT * FROM  ' . $param . '  ';
+        $sql = 'SELECT * FROM  ' . $param;
 
         return self::$db->query($sql)->fetchAll();
     }
-
 
 
     public static function Insert($table = '', $params = [])
@@ -56,6 +55,24 @@ class DB
             );
     }
 
+    public static function Update($table = '', $params = [], $where = '')
+    {
+        $keys = '';
+        $values = [];
+
+        foreach ($params as $key => $item) {
+            $keys .= $key . ' = ? , ';
+            array_push($values, $item);
+        }
+
+        $keys = trim($keys, ' , ');
+
+        return self::$db->prepare('UPDATE ' . $table . ' SET ' . $keys . ' WHERE ' . $where . ' ')
+            ->execute(
+                $values
+            );
+    }
+
     public static function Delete($param = "")
     {
         // sql to delete a record
@@ -71,11 +88,20 @@ class DB
     {
         // Truncate
         self::$db->exec("TRUNCATE TABLE " . $param);
-      
+        
+        
     }
 
     public static function DropTable($param = '') {
         self::$db->exec("DROP TABLE " . $param);
     }
+
+    public static function CloseDB()
+    {
+        self::$db = null;
+    }
+
 }
 
+
+// cURL

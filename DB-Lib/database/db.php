@@ -6,7 +6,7 @@ class DB
     public static function Connect()
     {
         try {
-            self::$db = new PDO("mysql:host=localhost;dbname=chat", 'root', '');
+            self::$db = new PDO("mysql:host=localhost;dbname=park", 'root', '');
             // set the PDO error mode to exception
             self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
@@ -35,6 +35,12 @@ class DB
         return self::$db->query($sql)->fetchAll();
     }
 
+    public static function GetRowCount($param = "")
+    {
+        $sql = 'SELECT * FROM  ' . $param;
+
+        return self::$db->query($sql)->rowCount();
+    }
 
     public static function Insert($table = '', $params = [])
     {
@@ -83,12 +89,10 @@ class DB
         
     }
 
-
     public static function Truncate($param = "")
     {
         // Truncate
         self::$db->exec("TRUNCATE TABLE " . $param);
-        
         
     }
 
@@ -103,5 +107,3 @@ class DB
 
 }
 
-
-// cURL

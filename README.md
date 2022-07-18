@@ -21,4 +21,7 @@ DB::Select('tbl_users')
         'password' => $password
     ]);
 
+// done using database class? close connection
+DB::CloseDB();
+
 ```

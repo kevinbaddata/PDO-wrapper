@@ -1,4 +1,4 @@
-# database-lib
+# PDO-wrapper
 
 ```php
 require_once ('./Database/db.php');

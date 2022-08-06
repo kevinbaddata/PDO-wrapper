@@ -1,6 +1,7 @@
 # PDO-wrapper
 
 ```php
+//check if the file has already been included
 require_once ('./Database/db.php');
 
 

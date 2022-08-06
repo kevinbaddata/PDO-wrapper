@@ -6,7 +6,7 @@ class DB
     public static function Connect()
     {
         try {
-            self::$db = new PDO("mysql:host=localhost;dbname=park", 'root', '');
+            self::$db = new PDO("mysql:host=localhost;dbname=", 'root', '');
             // set the PDO error mode to exception
             self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {

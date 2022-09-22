@@ -55,6 +55,7 @@ function csrf_token_is_valid()
     if ($token === $_SESSION['csrf_token']) {
         unset($_SESSION['csrf_token']);
         return true;
+        echo 'true';
     }
     return false;
 }
@@ -64,7 +65,7 @@ function csrf_token_tag()
     return '<input type="hidden" name="csrf_token" value="' . csrfTokenGenerator() . '">';
 }
 
-
+echo csrf_token_is_valid();
 
 
 ?>

@@ -1,4 +1,7 @@
 <?php
+// Path: DB/db.php
+// Compare this snippet from IP/ip.php:
+
 class DB
 {
     static $db;
